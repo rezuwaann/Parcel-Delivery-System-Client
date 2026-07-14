@@ -1,16 +1,29 @@
 import React from "react";
 import Logo from "../../../Components/Logo/Logo";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
+import useAuth from "../../../hooks/useAuth";
 
 const Navbar = () => {
-  const links=<>
-  <li><NavLink to={'/services'}>Services</NavLink></li>
-  <li><NavLink to={'/coverage'}>Coverage</NavLink></li>
-  <li><NavLink to={'/about'}>About Us</NavLink></li>
-  <li><NavLink to={'/pricing'}>Pricing</NavLink></li>
-  <li><NavLink to={'/blog'}>Blog</NavLink></li>
-  <li><NavLink to={'/contact'}>Contact</NavLink></li>
- 
+
+  const { user, logOut } = useAuth();
+
+  const handleLogOut = () => {
+    logOut()
+      .then()
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
+  console.log(user)
+  const links = <>
+    <li><NavLink to={'/services'}>Services</NavLink></li>
+    <li><NavLink to={'/coverage'}>Coverage</NavLink></li>
+    <li><NavLink to={'/about'}>About Us</NavLink></li>
+    <li><NavLink to={'/pricing'}>Pricing</NavLink></li>
+    <li><NavLink to={'/blog'}>Blog</NavLink></li>
+    <li><NavLink to={'/contact'}>Contact</NavLink></li>
+
   </>
   return (
     <div className="pb-5">
@@ -41,17 +54,22 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <Logo></Logo>
+          <NavLink to={'/'}><Logo></Logo></NavLink>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
-        
-               {links}
-             
+
+            {links}
+
           </ul>
         </div>
-        <div className="navbar-end">
-          <a className="btn">Button</a>
+        <div className="navbar-end flex gap-2">
+          {user ?
+            <NavLink to={'/'} onClick={handleLogOut} className='btn hover:bg-[#7C3AED] hover:text-white'>LogOut</NavLink>
+            : <NavLink to={'/login'} className='btn hover:bg-[#7C3AED] hover:text-white'>Login</NavLink>
+            }
+
+            <Link className="btn text-white bg-[#7C3AED]" to={'/rider'}>Be a Rider</Link>
         </div>
       </div>
     </div>
