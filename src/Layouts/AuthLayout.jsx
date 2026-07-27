@@ -16,7 +16,7 @@ const AuthLayout = () => {
                         <Outlet></Outlet>
                     </div>
 
-                    <div className='flex-1 hidden md:block bg-[#e2ebc7] rounded-xl p-0 py-auto md:flex md:items-center'>
+                    <div className='flex-1 hidden md:block bg-[#EDE9F9] rounded-xl p-0 py-auto md:flex md:items-center'>
                         <img src={authImage} alt="" />
                     </div>
                 </div>

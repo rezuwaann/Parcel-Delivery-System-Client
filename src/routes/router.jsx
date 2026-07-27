@@ -8,6 +8,12 @@ import Register from "../pages/Auth/Register/Register";
 import Login from "../pages/Auth/Login/Login";
 import PrivateRoute from "./PrivateRoute";
 import Rider from "../pages/Rider/Rider";
+import SendParcel from "../pages/SendParcel/SendParcel";
+import About from "../pages/About/About";
+import Dashboard from "../pages/Dashboard/Dashboard";
+import MyParcels from "../Components/MyParcels/MyParcels";
+import Pricing from "../pages/Pricing/Pricing";
+import Services from "../pages/Services/Services";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +34,24 @@ export const router = createBrowserRouter([
       {
         path: '/rider',
         element: <PrivateRoute><Rider></Rider></PrivateRoute>
+      }, {
+        path: '/send-parcel',
+        element: <PrivateRoute><SendParcel></SendParcel></PrivateRoute>,
+        loader: () => fetch('/serviceCenters.json')
+          .then(res => res.json())
+      },
+      {
+        path: '/about',
+        element: <About></About>
+      },
+      {
+        path: '/pricing',
+        element: <Pricing></Pricing>,
+        loader: () => fetch('/serviceCenters.json')
+          .then(res => res.json()),
+      },{
+        path:'/services',
+        element:<Services></Services>
       }
     ]
   },
@@ -43,6 +67,16 @@ export const router = createBrowserRouter([
         path: '/login',
         Component: Login
       }
+    ]
+  }
+  , {
+    path: 'dashboard',
+    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+    children: [
+      {
+        path: 'my-parcels',
+        Component: MyParcels
+      },
     ]
   }
 ]);
