@@ -14,6 +14,9 @@ import Dashboard from "../pages/Dashboard/Dashboard";
 import MyParcels from "../Components/MyParcels/MyParcels";
 import Pricing from "../pages/Pricing/Pricing";
 import Services from "../pages/Services/Services";
+import Payment from "../pages/Payment/Payment";
+import PaymentSuccess from "../pages/Payment/PaymentSuccess";
+import PaymentCancelled from "../pages/Payment/PaymentCancelled";
 
 export const router = createBrowserRouter([
   {
@@ -49,9 +52,9 @@ export const router = createBrowserRouter([
         element: <Pricing></Pricing>,
         loader: () => fetch('/serviceCenters.json')
           .then(res => res.json()),
-      },{
-        path:'/services',
-        element:<Services></Services>
+      }, {
+        path: '/services',
+        element: <Services></Services>
       }
     ]
   },
@@ -77,6 +80,18 @@ export const router = createBrowserRouter([
         path: 'my-parcels',
         Component: MyParcels
       },
+      {
+        path: 'payment/:parcelId',
+        Component: Payment
+      }, 
+      {
+        path: 'payment-success',
+        Component: PaymentSuccess
+      },
+      {
+        path: 'payment-cancelled',
+        Component: PaymentCancelled
+      }
     ]
   }
 ]);

@@ -6,12 +6,13 @@ import Brands from "../Brands/Brands";
 import Features from "../Features/Features";
 import BecomeMarchant from "../BecomeMarchant/BecomeMarchant";
 import Review from "../Review/Review";
+import Faq from "../../Faq/Faq";
 
 const Home = () => {
   
 
   return (
-    <div>
+    <div className="space-y-5">
       <Banner></Banner>
       <HowItWorks></HowItWorks>
       <OurServices></OurServices>
@@ -19,6 +20,7 @@ const Home = () => {
       <Features></Features>
       <BecomeMarchant></BecomeMarchant>
       <Review></Review>
+      <Faq></Faq>
     </div>
   );
 };
