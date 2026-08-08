@@ -88,7 +88,8 @@ const MyParcels = () => {
                 </h2>
             </div>
 
-            <div className="overflow-x-auto rounded-xl border border-base-200 shadow-sm">
+            {/* Desktop table */}
+            <div className="hidden md:block overflow-x-auto rounded-xl border border-base-200 shadow-sm">
                 <table className="table table-zebra">
                     <thead className="bg-base-200 text-sm uppercase tracking-wide">
                         <tr>
@@ -176,6 +177,74 @@ const MyParcels = () => {
                         )}
                     </tbody>
                 </table>
+            </div>
+
+            {/* Mobile cards */}
+            <div className="md:hidden space-y-4 mx-5">
+                {parcels.length === 0 ? (
+                    <div className="text-center py-10 text-gray-400 font-medium rounded-xl border border-base-200">
+                        No parcels found.
+                    </div>
+                ) : (
+                    parcels.map((p, index) => (
+                        <div
+                            key={index}
+                            className="rounded-xl border border-base-200 shadow-sm p-4 space-y-3"
+                        >
+                            <div className="flex items-start justify-between">
+                                <div>
+                                    <p className="text-xs text-gray-400">#{index + 1}</p>
+                                    <p className="font-medium">{p.parcelName}</p>
+                                </div>
+                                <p className="font-semibold text-[#7C3AED]">{p.cost}</p>
+                            </div>
+
+                            <div className="flex items-center justify-between text-sm">
+                                <span className="text-gray-500">{p.parcelWeight} kg</span>
+                                <span className="text-gray-500">
+                                    {new Date(p.createdAt).toLocaleDateString()}
+                                </span>
+                            </div>
+
+                            <div className="flex flex-wrap gap-2">
+                                {p.paymentStatus === 'paid' ?
+                                    <button className="btn btn-sm bg-[#7C3AED] text-white">Paid</button>
+                                    :
+                                    <button onClick={() => handlePayment(p)} className="btn btn-sm bg-red-500 text-white">Pay</button>
+                                }
+
+                                {p.deliveryStatus === 'delivered' ?
+                                    <button className="btn btn-sm bg-[#7C3AED] text-white">Delivered</button>
+                                    : <button className="btn btn-sm bg-black text-white">Not Delivered</button>
+                                }
+                            </div>
+
+                            <div className="flex items-center justify-end gap-1 pt-2 border-t border-base-200">
+                                <button
+                                    title="Edit"
+                                    className="btn btn-sm btn-square btn-ghost hover:bg-[#7C3AED] hover:text-white transition-colors"
+                                >
+                                    <FiEdit size={16} />
+                                </button>
+
+                                <button
+                                    title="View"
+                                    className="btn btn-sm btn-square btn-ghost hover:bg-[#7C3AED] hover:text-white transition-colors"
+                                >
+                                    <FaMagnifyingGlass size={14} />
+                                </button>
+
+                                <button
+                                    onClick={() => handleDelete(p._id)}
+                                    title="Delete"
+                                    className="btn btn-sm btn-square btn-ghost hover:bg-red-500 hover:text-white transition-colors"
+                                >
+                                    <FaTrashCan size={14} />
+                                </button>
+                            </div>
+                        </div>
+                    ))
+                )}
             </div>
         </div>
     );

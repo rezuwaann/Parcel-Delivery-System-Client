@@ -10,7 +10,7 @@ import { FaCreditCard } from 'react-icons/fa6';
 const Dashboard = () => {
     return (
         <div>
-            <Navbar></Navbar>
+           
             <div className="drawer lg:drawer-open">
                 <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content">
