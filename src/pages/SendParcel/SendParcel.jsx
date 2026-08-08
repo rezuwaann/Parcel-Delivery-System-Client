@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useLoaderData } from 'react-router';
+import { useLoaderData, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 import useAuth from '../../hooks/useAuth';
@@ -18,6 +18,7 @@ const SendParcel = () => {
     console.log(user.email)
 
     const axiosSecure = useAxiosSecure();
+    const navigate=useNavigate();
 
 
     const senderRegion = watch('senderRegion');
@@ -65,6 +66,7 @@ const SendParcel = () => {
         }
         console.log('cost = ', cost);
         data.cost=cost;
+        data.paymentStatus="pending";
         console.log(sameDistrict, parcelWeight)
 
         Swal.fire({
@@ -84,10 +86,12 @@ const SendParcel = () => {
                 .then(res => {
                     console.log('after saving parcel', res.data)
                 })
+
+                navigate('/dashboard/my-parcels')
                 
                 Swal.fire({
                     title: "Confirmed!",
-                    text: "Your parcel request has been sent.",
+                    text: "Your parcel  has been created. Please Pay",
                     icon: "success"
                 });
             }

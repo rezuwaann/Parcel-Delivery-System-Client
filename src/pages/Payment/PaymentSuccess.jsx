@@ -1,15 +1,37 @@
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, useSearchParams } from "react-router";
 import { CheckCircle2, PackageCheck, Home, Receipt } from "lucide-react";
+import { useEffect, useState } from "react";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const PaymentSuccess = () => {
-  const location = useLocation();
-  const { cost, parcelName, transactionId } = location.state || {};
+
+
+  const [paymentInfo, setPaymentInfo] = useState('');
+
+  const [searchParams] = useSearchParams();
+  const sessionId = searchParams.get('session_id')
+  const axiosSecure = useAxiosSecure();
+  console.log(sessionId)
+
+
+  useEffect(() => {
+    if (sessionId) {
+      axiosSecure.patch(`/payment-success?session_id=${sessionId}`)
+        .then(res => {
+          console.log(res.data);
+          setPaymentInfo({
+            transactionId: res.data.transactionId,
+            trackingId: res.data.trackingId,
+            cost: res.data.cost
+          })
+        })
+    }
+  }, [searchParams, sessionId, axiosSecure])
 
   return (
     <div className="w-full bg-white min-h-[80vh] flex items-center justify-center px-6 py-16">
       <div className="max-w-lg w-full rounded-3xl border border-[#EDE9FE] shadow-[0_4px_30px_rgba(124,58,237,0.08)] p-8 md:p-12 text-center">
-      
-      
+
         {/* Success icon */}
         <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[#EDE9FE]">
           <CheckCircle2 className="h-10 w-10 text-[#7C3AED]" strokeWidth={2} />
@@ -28,31 +50,31 @@ const PaymentSuccess = () => {
         </p>
 
         {/* Order summary */}
-        {(cost || parcelName || transactionId) && (
+        {(paymentInfo.cost || paymentInfo.trackingId || paymentInfo.transactionId) && (
           <div className="mt-8 rounded-2xl border border-[#EDE9FE] bg-[#FAF8FF] p-5 text-left space-y-3">
-            {parcelName && (
+            {paymentInfo.trackingId && (
               <div className="flex items-center justify-between text-sm">
-                <span className="text-[#6B6478]">Parcel</span>
-                <span className="font-semibold text-[#1E1B2E]">{parcelName}</span>
+                <span className="text-[#6B6478]">Tracking ID</span>
+                <span className="font-semibold text-[#1E1B2E]">{paymentInfo.trackingId}</span>
               </div>
             )}
-            {transactionId && (
+            {paymentInfo.transactionId && (
               <div className="flex items-center justify-between text-sm">
                 <span className="text-[#6B6478]">Transaction ID</span>
-                <span className="font-mono font-semibold text-[#1E1B2E]">{transactionId}</span>
+                <span className="font-mono font-semibold text-[#1E1B2E]">{paymentInfo.transactionId}</span>
               </div>
             )}
-            {cost && (
+            {paymentInfo.cost && (
               <div className="flex items-center justify-between text-sm pt-3 border-t border-[#EDE9FE]">
                 <span className="text-[#6B6478]">Amount paid</span>
-                <span className="font-bold text-[#7C3AED] text-lg">{cost} TK</span>
+                <span className="font-bold text-[#7C3AED] text-lg">{paymentInfo.cost} TK</span>
               </div>
             )}
           </div>
         )}
 
-       
-       
+
+
 
 
 

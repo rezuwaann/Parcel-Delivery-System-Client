@@ -4,6 +4,7 @@ import Logo from '../../Components/Logo/Logo';
 import Navbar from '../Shared/Navbar/Navbar';
 import { CiDeliveryTruck } from "react-icons/ci";
 import { FaHome } from "react-icons/fa";
+import { FaCreditCard } from 'react-icons/fa6';
 
 
 const Dashboard = () => {
@@ -35,7 +36,7 @@ const Dashboard = () => {
 
                         <ul className="menu w-full grow space-y-3">
                             <li>
-                                <Link to='/dashboard/my-parcels' className="is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold" data-tip="Home">
+                                <Link to='/' className="is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold" data-tip="Home">
                                     {/* Home icon */}
                                     <FaHome className=' text-2xl' />
                                     <span className="is-drawer-close:hidden">Home</span>
@@ -46,6 +47,13 @@ const Dashboard = () => {
                                     {/* Home icon */}
                                     <CiDeliveryTruck className=' text-2xl' />
                                     <span className="is-drawer-close:hidden">My Parcels</span>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to='/dashboard/payment-history' className="is-drawer-close:tooltip is-drawer-close:tooltip-right font-semibold" data-tip="Payment History">
+                                    {/* Home icon */}
+                                    <FaCreditCard className=' text-2xl' />
+                                    <span className="is-drawer-close:hidden">Payment History</span>
                                 </Link>
                             </li>
 
