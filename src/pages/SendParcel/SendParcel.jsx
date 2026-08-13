@@ -65,6 +65,7 @@ const SendParcel = () => {
 
         }
         console.log('cost = ', cost);
+        cost=parseFloat(cost.toFixed(2));
         data.cost=cost;
         data.paymentStatus="pending";
         console.log(sameDistrict, parcelWeight)
@@ -82,6 +83,8 @@ const SendParcel = () => {
 
 
             if (result.isConfirmed) {
+
+                
                 axiosSecure.post('/parcels', data)
                 .then(res => {
                     console.log('after saving parcel', res.data)

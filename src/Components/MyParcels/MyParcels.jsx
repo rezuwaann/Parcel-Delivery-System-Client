@@ -157,12 +157,143 @@ const MyParcels = () => {
                                             </button>
 
                                             <button
+                                                onClick={() => document.getElementById(`my_modal_${index}`).showModal()}
                                                 title="View"
                                                 className="btn btn-sm btn-square btn-ghost hover:bg-[#7C3AED] hover:text-white transition-colors"
                                             >
                                                 <FaMagnifyingGlass size={14} />
                                             </button>
 
+                                            <dialog id={`my_modal_${index}`} className="modal">
+                                                <div className="modal-box max-w-xl p-0 overflow-hidden rounded-3xl">
+                                                    {/* Header — route line */}
+                                                    <div className="px-6 pt-6 pb-5 md:px-8">
+                                                        <form method="dialog">
+                                                            <button className="btn btn-sm btn-circle btn-ghost absolute right-3 top-3 text-[#6B6478] hover:bg-[#F5F0FE] hover:text-[#7C3AED]">
+                                                                ✕
+                                                            </button>
+                                                        </form>
+
+                                                        <div className="flex items-center justify-between pr-8">
+                                                            <div>
+                                                                <span className="text-xs font-semibold uppercase tracking-widest text-[#7C3AED]">
+                                                                    {p.parcelType}
+                                                                </span>
+                                                                <h3 className="mt-1 text-2xl font-bold text-[#1E1B2E]">{p.parcelName}</h3>
+                                                            </div>
+                                                            {p.paymentStatus === 'paid' ? (
+                                                                <span className="shrink-0 rounded-full bg-[#EDE9FE] text-[#7C3AED] px-3 py-1 text-xs font-semibold">
+                                                                    Paid
+                                                                </span>
+                                                            ) : (
+                                                                <span className="shrink-0 rounded-full bg-red-50 text-red-500 px-3 py-1 text-xs font-semibold">
+                                                                    Payment due
+                                                                </span>
+                                                            )}
+                                                        </div>
+
+                                                        {/* Route */}
+                                                        <div className="mt-5 flex items-center gap-3">
+                                                            <div className="flex-1 min-w-0">
+                                                                <p className="text-sm font-semibold text-[#1E1B2E] truncate">{p.senderRegion}</p>
+                                                                <p className="text-xs text-[#6B6478]">Pickup</p>
+                                                            </div>
+                                                            <div className="flex items-center gap-1.5 shrink-0 px-1">
+                                                                <span className="h-1.5 w-1.5 rounded-full bg-[#7C3AED]" />
+                                                                <span className="h-px w-8 bg-[#DCD3F5]" />
+                                                                <span className="h-1.5 w-1.5 rounded-full bg-[#14121F]" />
+                                                            </div>
+                                                            <div className="flex-1 min-w-0 text-right">
+                                                                <p className="text-sm font-semibold text-[#1E1B2E] truncate">{p.recieverRegion}</p>
+                                                                <p className="text-xs text-[#6B6478]">Drop-off</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="border-t border-[#EEEAF6]" />
+
+                                                    {/* Body */}
+                                                    <div className="max-h-[60vh] overflow-y-auto px-6 py-6 md:px-8 space-y-6 bg-white">
+                                                        <div className="grid gap-6 sm:grid-cols-2">
+                                                            {/* Sender */}
+                                                            <div>
+                                                                <h4 className="text-xs font-semibold uppercase tracking-widest text-[#6B6478] mb-3">
+                                                                    Sender
+                                                                </h4>
+                                                                <div className="space-y-2 text-sm">
+                                                                    <p className="font-semibold text-[#1E1B2E]">{p.senderName}</p>
+                                                                    <p className="text-[#6B6478]">{p.senderEmail}</p>
+                                                                    <p className="text-[#6B6478]">{p.senderPhone}</p>
+                                                                    <p className="text-[#6B6478]">
+                                                                        {p.senderAddress}
+                                                                        {p.senderDistrict ? `, ${p.senderDistrict}` : ''}, {p.senderRegion}
+                                                                    </p>
+                                                                </div>
+                                                                {p.pickupInstruction && (
+                                                                    <p className="mt-3 text-xs text-[#6B6478] border-l-2 border-[#DCD3F5] pl-3">
+                                                                        {p.pickupInstruction}
+                                                                    </p>
+                                                                )}
+                                                            </div>
+
+                                                            {/* Receiver */}
+                                                            <div>
+                                                                <h4 className="text-xs font-semibold uppercase tracking-widest text-[#6B6478] mb-3">
+                                                                    Receiver
+                                                                </h4>
+                                                                <div className="space-y-2 text-sm">
+                                                                    <p className="font-semibold text-[#1E1B2E]">{p.recieverName}</p>
+                                                                    <p className="text-[#6B6478]">{p.recieverPhone}</p>
+                                                                    <p className="text-[#6B6478]">
+                                                                        {p.recieverAddress}
+                                                                        {p.recieverDistrict ? `, ${p.recieverDistrict}` : ''}, {p.recieverRegion}
+                                                                    </p>
+                                                                </div>
+                                                                {p.deliveryInstruction && (
+                                                                    <p className="mt-3 text-xs text-[#6B6478] border-l-2 border-[#DCD3F5] pl-3">
+                                                                        {p.deliveryInstruction}
+                                                                    </p>
+                                                                )}
+                                                            </div>
+                                                        </div>
+
+                                                        {/* Meta row */}
+                                                        <div className="grid grid-cols-3 gap-4 rounded-2xl bg-[#FAF8FF] border border-[#EDE9FE] px-5 py-4">
+                                                            <div>
+                                                                <p className="text-xs text-[#6B6478]">Weight</p>
+                                                                <p className="mt-0.5 font-semibold text-[#1E1B2E]">{p.parcelWeight} kg</p>
+                                                            </div>
+                                                            <div>
+                                                                <p className="text-xs text-[#6B6478]">Booked</p>
+                                                                <p className="mt-0.5 font-semibold text-[#1E1B2E]">
+                                                                    {new Date(p.createdAt).toLocaleDateString('en-US', {
+                                                                        day: '2-digit',
+                                                                        month: 'short',
+                                                                        year: 'numeric',
+                                                                    })}
+                                                                </p>
+                                                            </div>
+                                                            <div>
+                                                                <p className="text-xs text-[#6B6478]">Cost</p>
+                                                                <p className="mt-0.5 font-bold text-[#7C3AED]">{p.cost} TK</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Footer */}
+                                                    <div className="flex justify-end border-t border-[#EEEAF6] px-6 py-4 md:px-8">
+                                                        <form method="dialog">
+                                                            <button className="btn border border-[#DCD3F5] bg-white text-[#1E1B2E] hover:border-[#7C3AED] hover:text-[#7C3AED]">
+                                                                Close
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+
+                                                <form method="dialog" className="modal-backdrop">
+                                                    <button>close</button>
+                                                </form>
+                                            </dialog>
                                             <button
                                                 onClick={() => handleDelete(p._id)}
                                                 title="Delete"
@@ -228,11 +359,149 @@ const MyParcels = () => {
                                 </button>
 
                                 <button
+                                    onClick={() => document.getElementById(`my_modal_${index * 100}`).showModal()}
                                     title="View"
                                     className="btn btn-sm btn-square btn-ghost hover:bg-[#7C3AED] hover:text-white transition-colors"
                                 >
                                     <FaMagnifyingGlass size={14} />
                                 </button>
+
+                                <dialog id={`my_modal_${index * 100}`} className="modal">
+                                    <div className="modal-box max-w-xl p-0 overflow-hidden rounded-3xl">
+                                        {/* Header — route line */}
+                                        <div className="px-6 pt-6 pb-5 md:px-8">
+                                            <form method="dialog">
+                                                <button className="btn btn-sm btn-circle btn-ghost absolute right-3 top-3 text-[#6B6478] hover:bg-[#F5F0FE] hover:text-[#7C3AED]">
+                                                    ✕
+                                                </button>
+                                            </form>
+
+                                            <div className="flex items-center justify-between pr-8">
+                                                <div>
+                                                    <span className="text-xs font-semibold uppercase tracking-widest text-[#7C3AED]">
+                                                        {p.parcelType}
+                                                    </span>
+                                                    <h3 className="mt-1 text-2xl font-bold text-[#1E1B2E]">{p.parcelName}</h3>
+                                                </div>
+                                                {p.paymentStatus === 'paid' ? (
+                                                    <span className="shrink-0 rounded-full bg-[#EDE9FE] text-[#7C3AED] px-3 py-1 text-xs font-semibold">
+                                                        Paid
+                                                    </span>
+                                                ) : (
+                                                    <span className="shrink-0 rounded-full bg-red-50 text-red-500 px-3 py-1 text-xs font-semibold">
+                                                        Payment due
+                                                    </span>
+                                                )}
+                                            </div>
+
+                                            {/* Route */}
+                                            <div className="mt-5 flex items-center gap-3">
+                                                <div className="flex-1 min-w-0">
+                                                    <p className="text-sm font-semibold text-[#1E1B2E] truncate">{p.senderRegion}</p>
+                                                    <p className="text-xs text-[#6B6478]">Pickup</p>
+                                                </div>
+                                                <div className="flex items-center gap-1.5 shrink-0 px-1">
+                                                    <span className="h-1.5 w-1.5 rounded-full bg-[#7C3AED]" />
+                                                    <span className="h-px w-8 bg-[#DCD3F5]" />
+                                                    <span className="h-1.5 w-1.5 rounded-full bg-[#14121F]" />
+                                                </div>
+                                                <div className="flex-1 min-w-0 text-right">
+                                                    <p className="text-sm font-semibold text-[#1E1B2E] truncate">{p.recieverRegion}</p>
+                                                    <p className="text-xs text-[#6B6478]">Drop-off</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="border-t border-[#EEEAF6]" />
+
+                                        {/* Body */}
+                                        <div className="max-h-[60vh] overflow-y-auto px-6 py-6 md:px-8 space-y-6 bg-white">
+                                            <div className="grid gap-6 sm:grid-cols-2">
+                                                {/* Sender */}
+                                                <div>
+                                                    <h4 className="text-xs font-semibold uppercase tracking-widest text-[#6B6478] mb-3">
+                                                        Sender
+                                                    </h4>
+                                                    <div className="space-y-2 text-sm">
+                                                        <p className="font-semibold text-[#1E1B2E]">{p.senderName}</p>
+                                                        <p className="text-[#6B6478]">{p.senderEmail}</p>
+                                                        <p className="text-[#6B6478]">{p.senderPhone}</p>
+                                                        <p className="text-[#6B6478]">
+                                                            {p.senderAddress}
+                                                            {p.senderDistrict ? `, ${p.senderDistrict}` : ''}, {p.senderRegion}
+                                                        </p>
+                                                    </div>
+                                                    {p.pickupInstruction && (
+                                                        <p className="mt-3 text-xs text-[#6B6478] border-l-2 border-[#DCD3F5] pl-3">
+                                                            {p.pickupInstruction}
+                                                        </p>
+                                                    )}
+                                                </div>
+
+                                                {/* Receiver */}
+                                                <div>
+                                                    <h4 className="text-xs font-semibold uppercase tracking-widest text-[#6B6478] mb-3">
+                                                        Receiver
+                                                    </h4>
+                                                    <div className="space-y-2 text-sm">
+                                                        <p className="font-semibold text-[#1E1B2E]">{p.recieverName}</p>
+                                                        <p className="text-[#6B6478]">{p.recieverPhone}</p>
+                                                        <p className="text-[#6B6478]">
+                                                            {p.recieverAddress}
+                                                            {p.recieverDistrict ? `, ${p.recieverDistrict}` : ''}, {p.recieverRegion}
+                                                        </p>
+                                                    </div>
+                                                    {p.deliveryInstruction && (
+                                                        <p className="mt-3 text-xs text-[#6B6478] border-l-2 border-[#DCD3F5] pl-3">
+                                                            {p.deliveryInstruction}
+                                                        </p>
+                                                    )}
+                                                </div>
+                                            </div>
+
+                                            {/* Meta row */}
+                                            <div className="grid grid-cols-3 gap-4 rounded-2xl bg-[#FAF8FF] border border-[#EDE9FE] px-5 py-4">
+                                                <div>
+                                                    <p className="text-xs text-[#6B6478]">Weight</p>
+                                                    <p className="mt-0.5 font-semibold text-[#1E1B2E]">{p.parcelWeight} kg</p>
+                                                </div>
+                                                <div>
+                                                    <p className="text-xs text-[#6B6478]">Booked</p>
+                                                    <p className="mt-0.5 font-semibold text-[#1E1B2E]">
+                                                        {new Date(p.createdAt).toLocaleDateString('en-US', {
+                                                            day: '2-digit',
+                                                            month: 'short',
+                                                            year: 'numeric',
+                                                        })}
+                                                    </p>
+                                                </div>
+                                                <div>
+                                                    <p className="text-xs text-[#6B6478]">Cost</p>
+                                                    <p className="mt-0.5 font-bold text-[#7C3AED]">{p.cost} TK</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {/* Footer */}
+                                        <div className="flex justify-end border-t border-[#EEEAF6] px-6 py-4 md:px-8">
+                                            <form method="dialog">
+                                                <button className="btn border border-[#DCD3F5] bg-white text-[#1E1B2E] hover:border-[#7C3AED] hover:text-[#7C3AED]">
+                                                    Close
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <form method="dialog" className="modal-backdrop">
+                                        <button>close</button>
+                                    </form>
+                                </dialog>
+
+
+
+
+
+
 
                                 <button
                                     onClick={() => handleDelete(p._id)}
