@@ -14,11 +14,11 @@ const SendParcel = () => {
         watch
     } = useForm();
 
-    const {user}=useAuth();
+    const { user } = useAuth();
     console.log(user.email)
 
     const axiosSecure = useAxiosSecure();
-    const navigate=useNavigate();
+    const navigate = useNavigate();
 
 
     const senderRegion = watch('senderRegion');
@@ -65,9 +65,9 @@ const SendParcel = () => {
 
         }
         console.log('cost = ', cost);
-        cost=parseFloat(cost.toFixed(2));
-        data.cost=cost;
-        data.paymentStatus="pending";
+        cost = parseFloat(cost.toFixed(2));
+        data.cost = cost;
+        data.paymentStatus = "pending";
         console.log(sameDistrict, parcelWeight)
 
         Swal.fire({
@@ -84,14 +84,14 @@ const SendParcel = () => {
 
             if (result.isConfirmed) {
 
-                
+
                 axiosSecure.post('/parcels', data)
-                .then(res => {
-                    console.log('after saving parcel', res.data)
-                })
+                    .then(res => {
+                        console.log('after saving parcel', res.data)
+                    })
 
                 navigate('/dashboard/my-parcels')
-                
+
                 Swal.fire({
                     title: "Confirmed!",
                     text: "Your parcel  has been created. Please Pay",
@@ -154,11 +154,11 @@ const SendParcel = () => {
                     <div className='flex gap-4 flex-col md:flex-row'>
                         <fieldset className="fieldset w-full">
                             <label className="text-sm font-semibold text-[#1E1B2E] label">Parcel Name</label>
-                            <input type="text" className="input w-full bg-white border-[#EDE9FE] focus:border-[#7C3AED] focus:outline-[#7C3AED]"  {...register('parcelName',{required:true})} placeholder="Parcel Name" />
+                            <input type="text" className="input w-full bg-white border-[#EDE9FE] focus:border-[#7C3AED] focus:outline-[#7C3AED]"  {...register('parcelName', { required: true })} placeholder="Parcel Name" />
                         </fieldset>
                         <fieldset className="fieldset w-full">
                             <label className="text-sm font-semibold text-[#1E1B2E] label">Parcel Weight (KG)</label>
-                            <input type="number" className="input w-full bg-white border-[#EDE9FE] focus:border-[#7C3AED] focus:outline-[#7C3AED]" step='0.01' {...register('parcelWeight', { valueAsNumber: true ,required:true})} placeholder="Parcel Weight" />
+                            <input type="number" className="input w-full bg-white border-[#EDE9FE] focus:border-[#7C3AED] focus:outline-[#7C3AED]" step='0.01' {...register('parcelWeight', { valueAsNumber: true, required: true })} placeholder="Parcel Weight" />
                         </fieldset>
                     </div>
                 </div>
@@ -178,23 +178,23 @@ const SendParcel = () => {
 
                         <fieldset className="fieldset w-full">
                             <label className="text-sm font-semibold text-[#1E1B2E] label">Sender Name</label>
-                            <input type="text" className="input w-full bg-white border-[#EDE9FE] focus:border-[#7C3AED] focus:outline-[#7C3AED]"  {...register('senderName',{required:true})} placeholder="Sender Name" />
+                            <input type="text" className="input w-full bg-white border-[#EDE9FE] focus:border-[#7C3AED] focus:outline-[#7C3AED]"  {...register('senderName', { required: true })} placeholder="Sender Name" />
                         </fieldset>
 
                         <fieldset className="fieldset w-full">
                             <label className="text-sm font-semibold text-[#1E1B2E] label">Sender Email</label>
-                            <input type="text"  defaultValue={user.email} className="input w-full bg-white border-[#EDE9FE] focus:border-[#7C3AED] focus:outline-[#7C3AED]"  {...register('senderEmail',{required:true})} placeholder="Sender Email"/>
+                            <input type="text" defaultValue={user.email} className="input w-full bg-white border-[#EDE9FE] focus:border-[#7C3AED] focus:outline-[#7C3AED]"  {...register('senderEmail', { required: true })} placeholder="Sender Email" />
                         </fieldset>
 
                         <fieldset className="fieldset w-full">
                             <label className="text-sm font-semibold text-[#1E1B2E] label">Sender Address</label>
-                            <input type="text" className="input w-full bg-white border-[#EDE9FE] focus:border-[#7C3AED] focus:outline-[#7C3AED]"  {...register('senderAddress',{required:true})} placeholder="Address"/>
+                            <input type="text" className="input w-full bg-white border-[#EDE9FE] focus:border-[#7C3AED] focus:outline-[#7C3AED]"  {...register('senderAddress', { required: true })} placeholder="Address" />
                         </fieldset>
 
 
                         <fieldset className="fieldset w-full">
                             <label className="text-sm font-semibold text-[#1E1B2E] label">Sender Phone NO</label>
-                            <input type="text" className="input w-full bg-white border-[#EDE9FE] focus:border-[#7C3AED] focus:outline-[#7C3AED]"  {...register('senderPhone',{required:true})} placeholder="Sender Phone NO" />
+                            <input type="text" className="input w-full bg-white border-[#EDE9FE] focus:border-[#7C3AED] focus:outline-[#7C3AED]"  {...register('senderPhone', { required: true })} placeholder="Sender Phone NO" />
                         </fieldset>
 
 
@@ -242,18 +242,18 @@ const SendParcel = () => {
 
                         <fieldset className="fieldset w-full">
                             <label className="text-sm font-semibold text-[#1E1B2E] label">Reciever Name</label>
-                            <input type="text" className="input w-full bg-white border-[#EDE9FE] focus:border-[#7C3AED] focus:outline-[#7C3AED]"  {...register('recieverName',{required:true})} placeholder="Reciever Name" />
+                            <input type="text" className="input w-full bg-white border-[#EDE9FE] focus:border-[#7C3AED] focus:outline-[#7C3AED]"  {...register('recieverName', { required: true })} placeholder="Reciever Name" />
                         </fieldset>
 
                         <fieldset className="fieldset w-full">
                             <label className="text-sm font-semibold text-[#1E1B2E] label">Reciever Address</label>
-                            <input type="text" className="input w-full bg-white border-[#EDE9FE] focus:border-[#7C3AED] focus:outline-[#7C3AED]"  {...register('recieverAddress',{required:true})} placeholder="Address" />
+                            <input type="text" className="input w-full bg-white border-[#EDE9FE] focus:border-[#7C3AED] focus:outline-[#7C3AED]"  {...register('recieverAddress', { required: true })} placeholder="Address" />
                         </fieldset>
 
 
                         <fieldset className="fieldset w-full">
                             <label className="text-sm font-semibold text-[#1E1B2E] label">Reciever Phone NO</label>
-                            <input type="text" className="input w-full bg-white border-[#EDE9FE] focus:border-[#7C3AED] focus:outline-[#7C3AED]"  {...register('recieverPhone',{required:true})} placeholder="Reciever Contact NO" />
+                            <input type="text" className="input w-full bg-white border-[#EDE9FE] focus:border-[#7C3AED] focus:outline-[#7C3AED]"  {...register('recieverPhone', { required: true })} placeholder="Reciever Contact NO" />
                         </fieldset>
 
 
@@ -272,12 +272,12 @@ const SendParcel = () => {
                         </fieldset>
 
 
-                        
+
                         <fieldset className="fieldset w-full">
                             <label className="text-sm font-semibold text-[#1E1B2E] label">Reciever's District</label>
 
 
-                            <select  defaultValue="Select Your District" {...register('recieverDistrict')} className="select w-full bg-white border-[#EDE9FE] focus:border-[#7C3AED] text-gray-600">
+                            <select defaultValue="Select Your District" {...register('recieverDistrict')} className="select w-full bg-white border-[#EDE9FE] focus:border-[#7C3AED] text-gray-600">
                                 <option value='' disabled={true} >Select Your District</option>
 
 

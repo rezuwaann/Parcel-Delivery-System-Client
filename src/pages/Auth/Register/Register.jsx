@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import useAuth from '../../../hooks/useAuth';
 import { NavLink, useLocation, useNavigate } from 'react-router';
 import axios from 'axios';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const Register = () => {
     const { register,
@@ -18,6 +19,7 @@ const Register = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
+    const axiosSecure = useAxiosSecure();
 
     console.log(location);
 
@@ -37,6 +39,22 @@ const Register = () => {
                     .then(res => {
                         console.log('aftre image upload', res.data.data.url)
 
+
+                        // create user in the database
+                        const userInfo = {
+                            email: data.email,
+                            displayName: data.name,
+                            photoURL: res.data.data.url,
+
+
+                        }
+
+                        axiosSecure.post('/users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    console.log('user created in the databse')
+                                }
+                            })
 
                         const userProfile = {
                             displayName: data.name,
@@ -60,7 +78,24 @@ const Register = () => {
         signInWithGoogle()
             .then(result => {
                 console.log(result)
+
+                // create user in the database
+                const userInfo = {
+                    email: result.user.email,
+                    displayName: result.user.displayName,
+                    photoURL: result.user.photoURL
+
+
+                }
+
+                axiosSecure.post('/users', userInfo)
+                    .then(res => {
+                        console.log('user data has been stored', res.data)
+                    })
+
+
                 navigate(location.state || '/')
+
             })
             .then(error => {
                 console.log(error)

@@ -3,19 +3,30 @@ import { Link, Outlet } from 'react-router';
 import Logo from '../../Components/Logo/Logo';
 import Navbar from '../Shared/Navbar/Navbar';
 import { CiDeliveryTruck } from "react-icons/ci";
-import { FaHome } from "react-icons/fa";
+import { FaHome, FaUsers } from "react-icons/fa";
 import { FaCreditCard } from 'react-icons/fa6';
+import { MdDeliveryDining } from "react-icons/md";
+import { GrUserWorker } from "react-icons/gr";
 
 // Dock magnification tuning — tweak these to taste
 const BASE_SIZE = 24;   // resting icon size in px
 const MAX_SIZE = 42;    // icon size right under the cursor
 const FALLOFF = 70;     // px radius of influence — smaller = punchier, more isolated bump
 
+const NAV_ITEMS = [
+    { to: '/', icon: FaHome, label: 'Home' },
+    { to: '/dashboard/my-parcels', icon: CiDeliveryTruck, label: 'My Parcels' },
+    { to: '/dashboard/payment-history', icon: FaCreditCard, label: 'Payment History' },
+    { to: '/dashboard/approve-riders', icon: MdDeliveryDining, label: 'Approve New Riders' },
+    { to: '/dashboard/current-riders', icon: GrUserWorker, label: 'Current Riders' },
+    {to:'/dashboard/manage-users',icon:FaUsers,label :'Manage Users'}
+];
+
 const Dashboard = () => {
     const itemRefs = useRef([]);
     // Icon sizes now live in state — computed inside the event handler (where
     // reading refs is legal) and never read from refs during render.
-    const [iconSizes, setIconSizes] = useState([BASE_SIZE, BASE_SIZE, BASE_SIZE]);
+    const [iconSizes, setIconSizes] = useState(Array(NAV_ITEMS.length).fill(BASE_SIZE));
 
     const handleMouseMove = (e) => {
         const mouseY = e.clientY;
@@ -33,7 +44,7 @@ const Dashboard = () => {
     };
 
     const handleMouseLeave = () => {
-        setIconSizes([BASE_SIZE, BASE_SIZE, BASE_SIZE]);
+        setIconSizes(Array(NAV_ITEMS.length).fill(BASE_SIZE));
     };
 
     return (
@@ -64,41 +75,22 @@ const Dashboard = () => {
                         className="group flex min-h-full flex-col items-start bg-base-200 w-14 hover:w-64 transition-[width] duration-300 ease-in-out overflow-hidden"
                     >
                         {/* Sidebar content here */}
-                        {/* List item */}
-
                         <ul className="menu w-full grow space-y-3">
-                            <li ref={(el) => (itemRefs.current[0] = el)}>
-                                <Link to='/' className="tooltip tooltip-right font-semibold whitespace-nowrap" data-tip="Home">
-                                    {/* Home icon */}
-                                    <FaHome
-                                        className='shrink-0 transition-[font-size] duration-150 ease-out'
-                                        style={{ fontSize: `${iconSizes[0]}px` }}
-                                    />
-                                    <span className="hidden group-hover:inline">Home</span>
-                                </Link>
-                            </li>
-                            <li ref={(el) => (itemRefs.current[1] = el)}>
-                                <Link to='/dashboard/my-parcels' className="tooltip tooltip-right font-semibold whitespace-nowrap" data-tip="My Parcels">
-                                    {/* Home icon */}
-                                    <CiDeliveryTruck
-                                        className='shrink-0 transition-[font-size] duration-150 ease-out'
-                                        style={{ fontSize: `${iconSizes[1]}px` }}
-                                    />
-                                    <span className="hidden group-hover:inline">My Parcels</span>
-                                </Link>
-                            </li>
-                            <li ref={(el) => (itemRefs.current[2] = el)}>
-                                <Link to='/dashboard/payment-history' className="tooltip tooltip-right font-semibold whitespace-nowrap" data-tip="Payment History">
-                                    {/* Home icon */}
-                                    <FaCreditCard
-                                        className='shrink-0 transition-[font-size] duration-150 ease-out'
-                                        style={{ fontSize: `${iconSizes[2]}px` }}
-                                    />
-                                    <span className="hidden group-hover:inline">Payment History</span>
-                                </Link>
-                            </li>
-
-
+                            {NAV_ITEMS.map((item, i) => (
+                                <li key={item.to} ref={(el) => (itemRefs.current[i] = el)}>
+                                    <Link
+                                        to={item.to}
+                                        className="tooltip tooltip-right font-semibold whitespace-nowrap"
+                                        data-tip={item.label}
+                                    >
+                                        <item.icon
+                                            className='shrink-0 transition-[font-size] duration-150 ease-out'
+                                            style={{ fontSize: `${iconSizes[i]}px` }}
+                                        />
+                                        <span className="hidden group-hover:inline">{item.label}</span>
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 </div>

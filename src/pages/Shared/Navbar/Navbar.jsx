@@ -22,7 +22,10 @@ const Navbar = () => {
     <li><NavLink className='font-semibold text-lg ' to={'/about'}>About Us</NavLink></li>
     <li><NavLink className='font-semibold text-lg ' to={'/pricing'}>Pricing</NavLink></li>
     <li><NavLink className='font-semibold text-lg ' to={'/send-parcel'}>Send Parcel</NavLink></li>
-    <li><NavLink className='font-semibold text-lg ' to={'/dashboard/my-parcels'}>Dashboard</NavLink></li>
+    {
+      user?
+      <li><NavLink className='font-semibold text-lg ' to={'/dashboard/my-parcels'}>Dashboard</NavLink></li>:<></>
+    }
 
   </>
   return (
