@@ -21,6 +21,9 @@ import PaymentHistory from "../pages/Payment/PaymentHistory";
 import ApproveRiders from "../pages/ApproveRiders/ApproveRiders";
 import CurrentRiders from "../pages/CurrentRiders/CurrentRiders";
 import ManageUsers from "../pages/ManageUsers/ManageUsers";
+import AdminRoute from "./AdminRoute";
+import ErrorPage from "../Components/ErrorPage/ErrorPage";
+import AssignRiders from "../pages/AssignRiders/AssignRiders";
 
 export const router = createBrowserRouter([
   {
@@ -79,7 +82,8 @@ export const router = createBrowserRouter([
       }
     ]
   }
-  , {
+  ,
+   {
     path: 'dashboard',
     element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
     children: [
@@ -102,15 +106,23 @@ export const router = createBrowserRouter([
       },
       {
         path:'approve-riders',
-        Component:ApproveRiders
+        element:<AdminRoute><ApproveRiders></ApproveRiders></AdminRoute>
       },{
         path:'current-riders',
-        Component:CurrentRiders
+        element:<AdminRoute><CurrentRiders></CurrentRiders></AdminRoute>
       },
       {
         path:'manage-users',
-        Component:ManageUsers
+        element:<AdminRoute><ManageUsers></ManageUsers></AdminRoute>
+      },{
+        path:'assign-riders',
+        element:<AdminRoute><AssignRiders></AssignRiders></AdminRoute>
       }
     ]
+  },
+  {
+    path:"*",
+    element:<ErrorPage></ErrorPage>
+   
   }
 ]);

@@ -104,18 +104,18 @@ const CurrentRiders = () => {
             {/* Riders — desktop table (casual info only) */}
             {!isLoading && riders.length > 0 && (
                 <div className="hidden md:block rounded-3xl border border-[#EDE9FE] bg-white overflow-hidden shadow-[0_4px_30px_rgba(124,58,237,0.08)]">
-                    <table className="w-full text-sm">
+                    <table className="w-full text-lg">
                         <thead>
                             <tr className="bg-[#FAF8FF] text-left text-[#6B6478] uppercase text-xs tracking-wide">
                                 <th className="px-6 py-4 font-semibold">Name</th>
                                 <th className="px-6 py-4 font-semibold">Contact</th>
                                 <th className="px-6 py-4 font-semibold">Region</th>
                                 <th className="px-6 py-4 font-semibold">Vehicle</th>
-                                <th className="px-6 py-4 font-semibold">Applied</th>
+                                <th className="px-6 py-4 font-semibold">Status</th>
                                 <th className="px-6 py-4 font-semibold text-right">Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="text-lg">
                             {riders.map((rider) => (
                                 <tr
                                     key={rider._id}
@@ -138,9 +138,8 @@ const CurrentRiders = () => {
                                     </td>
                                     <td className="px-6 py-4 text-[#6B6478]">{rider.vehicleType}</td>
                                     <td className="px-6 py-4 text-[#6B6478]">
-                                        <div className="flex items-center gap-1.5 text-xs">
-                                            <CalendarDays className="h-3.5 w-3.5" />
-                                            {formatDate(rider.appliedAt)}
+                                        <div className="flex items-center gap-1.5 text-lg">
+                                            {rider.workStatus}
                                         </div>
                                     </td>
                                     <td className="px-6 py-4">
@@ -202,8 +201,7 @@ const CurrentRiders = () => {
                                     {rider.region}
                                 </p>
                                 <p className="flex items-center gap-1.5">
-                                    <CalendarDays className="h-3.5 w-3.5" />
-                                    {formatDate(rider.appliedAt)}
+                                    {rider.workStatus}
                                 </p>
                             </div>
 

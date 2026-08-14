@@ -102,6 +102,7 @@ const MyParcels = () => {
                             <th>Cost</th>
                             <th>Payment Status</th>
                             <th>Delivery Status Status</th>
+                            <th>Tracking Id</th>
                             <th>Created</th>
                             <th className="">Actions</th>
                         </tr>
@@ -139,12 +140,23 @@ const MyParcels = () => {
                                     </td>
 
                                     <td>
-                                        {p.deliveryStatus === 'delivered' ?
-                                            <button className="btn bg-[#7C3AED] text-white">Delivered</button>
-                                            : <button className="btn bg-black text-white">Not Delivered</button>
+                                        {p.paymentStatus!=='paid'&&
+                                          <button className="btn bg-black text-white">Payment Pending</button>
                                         }
+                                        {p.parcelStatus === 'pendingPickup' &&
+                                            <button className="btn bg-black text-white">Pickup Pending</button>
+                                            
+                                        }
+                                        {/* {p.parcelStatus === 'pendingPickup' &&
+                                            <button className="btn bg-[#7C3AED] text-white">Pickup Pending</button>
+                                            
+                                        } */}
                                     </td>
 
+                                    <td>
+                                       {p.trackingId?
+                                       <p className='font-semibold'>  {p.trackingId}</p>:<p>Payment Not Completed</p>}
+                                    </td>
 
                                     <td className="text-gray-500">
                                         {new Date(p.createdAt).toLocaleDateString()}
