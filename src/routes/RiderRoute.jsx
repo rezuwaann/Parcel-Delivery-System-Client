@@ -4,7 +4,7 @@ import Loading from '../Components/Loading/Loading';
 import useRole from '../hooks/useRole';
 import Forbidden from '../Components/Forbidden/Forbidden';
 
-const AdminRoute = ({children}) => {
+const RiderRoute = ({children}) => {
     const { user, loading } = useAuth();
     const { role, roleLoading } = useRole();
     
@@ -13,11 +13,11 @@ const AdminRoute = ({children}) => {
         return <Loading></Loading>;
     }
 
-    if (role !== 'admin') {
+    if (role !== 'rider') {
         return <Forbidden></Forbidden>
     }
 
     return children;
 };
 
-export default AdminRoute;
+export default RiderRoute;

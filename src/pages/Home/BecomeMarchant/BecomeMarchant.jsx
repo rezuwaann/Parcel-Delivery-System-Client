@@ -1,6 +1,7 @@
 import React from "react";
 import becomeMarchant from '../../../assets/be-a-merchant-bg.png'
 import marchantImage from '../../../assets/location-merchant.png'
+import { Link } from "react-router";
 
 const BecomeMarchant = () => {
   return (
@@ -13,8 +14,8 @@ const BecomeMarchant = () => {
           every corner of Bangladesh right on time.
         </p>
         <div className="flex flex-col justify-center md:flex-row font-bold gap-3">
-          <button className="rounded-full px-5 py-3 bg-[#7C3AED]">Become a Marchant</button>
-          <button className="rounded-full px-5 py-3 text-[#7C3AED] border-2 border-[#7C3AED]">Earn With Uthao Courier</button>
+          <Link to={'/rider'} className="rounded-full px-5 py-3 bg-[#7C3AED]">Become a Rider</Link>
+          {/* <button className="rounded-full px-5 py-3 text-[#7C3AED] border-2 border-[#7C3AED]">Earn With Uthao Courier</button> */}
         </div>
       </div>
 

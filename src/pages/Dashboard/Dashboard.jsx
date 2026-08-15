@@ -1,11 +1,12 @@
 import React, { useRef, useState } from 'react';
 import { Link, Outlet } from 'react-router';
 import { CiDeliveryTruck } from "react-icons/ci";
-import { FaHome, FaUsers } from "react-icons/fa";
-import { FaCreditCard } from 'react-icons/fa6';
+import { FaHome, FaTasks, FaUsers } from "react-icons/fa";
+import { FaCreditCard, FaMagnifyingGlass } from 'react-icons/fa6';
 import { MdDeliveryDining, MdOutlineDirectionsBike } from "react-icons/md";
 import { GrUserWorker } from "react-icons/gr";
 import useRole from '../../hooks/useRole';
+import { MagnetIcon } from 'lucide-react';
 
 const BASE_SIZE = 24;
 const MAX_SIZE = 42;
@@ -164,6 +165,23 @@ const Dashboard = () => {
                                             </span>
                                         </Link>
                                     </li>
+
+                                    {/* Payment History */}
+                                    <li ref={(el) => (itemRefs.current[2] = el)}>
+                                        <Link
+                                            to="/dashboard/track"
+                                            className="tooltip tooltip-right font-semibold whitespace-nowrap"
+                                            data-tip="Payment History"
+                                        >
+                                            <FaMagnifyingGlass
+                                                className="shrink-0 transition-[font-size] duration-150 ease-out"
+                                                style={{ fontSize: `${iconSizes[2]}px` }}
+                                            />
+                                            <span className="hidden group-hover:inline">
+                                                Track Your Parcel
+                                            </span>
+                                        </Link>
+                                    </li>
                                 </>
 
                             }
@@ -243,6 +261,28 @@ const Dashboard = () => {
                                         </Link>
                                     </li>
 
+                                </>
+                            }
+
+                            {
+                                role==='rider'&&
+                                <>
+                                {/* Assigned deliveries */}
+                                    <li ref={(el) => (itemRefs.current[5] = el)}>
+                                        <Link
+                                            to="/dashboard/assigned-deliveries"
+                                            className="tooltip tooltip-right font-semibold whitespace-nowrap"
+                                            data-tip="Assigned Deliveries"
+                                        >
+                                            <FaTasks
+                                                className="shrink-0 transition-[font-size] duration-150 ease-out"
+                                                style={{ fontSize: `${iconSizes[5]}px` }}
+                                            />
+                                            <span className="hidden group-hover:inline">
+                                                Assigned Deliveries
+                                            </span>
+                                        </Link>
+                                    </li>
                                 </>
                             }
 

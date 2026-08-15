@@ -24,6 +24,10 @@ import ManageUsers from "../pages/ManageUsers/ManageUsers";
 import AdminRoute from "./AdminRoute";
 import ErrorPage from "../Components/ErrorPage/ErrorPage";
 import AssignRiders from "../pages/AssignRiders/AssignRiders";
+import AssignedDeliveries from "../pages/AssignedDeliveries/AssignedDeliveries";
+import RiderRoute from "./RiderRoute";
+import ParcelDetails from "../pages/ParcelDetails/ParcelDetails";
+import Track from "../pages/Track/Track";
 
 export const router = createBrowserRouter([
   {
@@ -83,7 +87,7 @@ export const router = createBrowserRouter([
     ]
   }
   ,
-   {
+  {
     path: 'dashboard',
     element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
     children: [
@@ -103,26 +107,42 @@ export const router = createBrowserRouter([
       {
         path: 'payment-history',
         Component: PaymentHistory
+      }, {
+        path: 'my-parcels/:id',
+        element: <ParcelDetails />
+      },{
+        path:'track',
+        Component:Track
+      },
+
+      // rider routes
+
+
+      {
+        path: 'assigned-deliveries',
+        element: <RiderRoute><AssignedDeliveries></AssignedDeliveries></RiderRoute>
+      },
+
+      // admin routes
+      {
+        path: 'approve-riders',
+        element: <AdminRoute><ApproveRiders></ApproveRiders></AdminRoute>
+      }, {
+        path: 'current-riders',
+        element: <AdminRoute><CurrentRiders></CurrentRiders></AdminRoute>
       },
       {
-        path:'approve-riders',
-        element:<AdminRoute><ApproveRiders></ApproveRiders></AdminRoute>
-      },{
-        path:'current-riders',
-        element:<AdminRoute><CurrentRiders></CurrentRiders></AdminRoute>
-      },
-      {
-        path:'manage-users',
-        element:<AdminRoute><ManageUsers></ManageUsers></AdminRoute>
-      },{
-        path:'assign-riders',
-        element:<AdminRoute><AssignRiders></AssignRiders></AdminRoute>
+        path: 'manage-users',
+        element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
+      }, {
+        path: 'assign-riders',
+        element: <AdminRoute><AssignRiders></AssignRiders></AdminRoute>
       }
     ]
   },
   {
-    path:"*",
-    element:<ErrorPage></ErrorPage>
-   
+    path: "*",
+    element: <ErrorPage></ErrorPage>
+
   }
 ]);

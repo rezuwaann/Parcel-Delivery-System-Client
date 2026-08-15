@@ -101,7 +101,7 @@ const Services = () => {
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
-                to="/track"
+                to="/dashboard/track"
                 className="inline-flex items-center justify-center gap-2 rounded-lg border border-[#DCD3F5] px-6 py-3 text-sm font-semibold text-[#14121F] transition-colors hover:border-[#7C3AED] hover:text-[#7C3AED]"
               >
                 Track a shipment
