@@ -1,6 +1,6 @@
-# 📦 ZapShift — Parcel Delivery Management System
+# 📦 DeliveryX — Parcel Delivery Management System
 
-ZapShift is a home/office pickup parcel delivery platform that streamlines booking, tracking, and delivery for **Users**, **Admins**, and **Riders** across Bangladesh. It offers real-time tracking, dynamic pricing, secure OTP/tracking-ID based delivery confirmation, and role-based dashboards for a fast, reliable, and transparent logistics experience.
+DeliveryX is a home/office pickup parcel delivery platform that streamlines booking, tracking, and delivery for **Users**, **Admins**, and **Riders** across Bangladesh. It offers real-time tracking, dynamic pricing, secure OTP/tracking-ID based delivery confirmation, and role-based dashboards for a fast, reliable, and transparent logistics experience.
 
 🔗 **Live Site:** [Add your live client URL here]
 🔗 **Server API:** [Add your live server/API URL here]
@@ -9,7 +9,7 @@ ZapShift is a home/office pickup parcel delivery platform that streamlines booki
 
 ## 🧑‍🤝‍🧑 User Roles
 
-ZapShift is built around three coordinated roles:
+DeliveryX is built around three coordinated roles:
 
 | Role | Responsibilities |
 |---|---|

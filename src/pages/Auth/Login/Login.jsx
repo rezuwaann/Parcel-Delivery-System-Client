@@ -76,7 +76,7 @@ const Login = () => {
             <form onSubmit={handleSubmit(handleLogin)}>
                 <fieldset className="fieldset flex flex-col gap-3">
                     <h1 className='text-5xl font-bold'>Welcome Back</h1>
-                    <h2 className='text-xl '>Login With ZapShift</h2>
+                    <h2 className='text-xl '>Login With DeliveryX</h2>
 
                     <label className="label text-lg">Email</label>
                     <input name='email' type="email" {...register('email', { required: true })} className="input" placeholder="Email" />

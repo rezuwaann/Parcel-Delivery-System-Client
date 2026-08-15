@@ -108,7 +108,7 @@ const Register = () => {
             <form onSubmit={handleSubmit(handleRegistration)}>
                 <fieldset className="fieldset gap-3">
                     <h1 className='text-5xl font-bold'>Create an Account</h1>
-                    <h2 className='text-xl '>Register With ZapShift</h2>
+                    <h2 className='text-xl '>Register With DeliveryX</h2>
 
 
                     {/* name */}
